@@ -10,13 +10,11 @@ import com.anthonytepach.configuracion.LoggerRegistros;
 import com.anthonytepach.configuracion.RenderTables;
 import com.anthonytepach.modelos.MProyecto;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Stack;
 import javax.swing.JRootPane;
-import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -100,11 +98,11 @@ public class C_Proyecto {
         //boton ver O.P
         javax.swing.JButton btn_ver = new javax.swing.JButton("Ver O.P.");
         btn_ver.setName("V");
-        btn_ver.setCursor(new Cursor(Cursor.HAND_CURSOR));;
+        btn_ver.setCursor(new Cursor(Cursor.HAND_CURSOR));
         //boton nueva O.P
         javax.swing.JButton btn_agregar = new javax.swing.JButton("Nueva O.P.");
         btn_agregar.setName("N");
-        btn_agregar.setCursor(new Cursor(Cursor.HAND_CURSOR));;
+        btn_agregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         //boton reporte
         javax.swing.JButton btn_reporte = new javax.swing.JButton("PDF");
         btn_reporte.setName("R");
