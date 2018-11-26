@@ -99,14 +99,17 @@ public class C_Proyecto {
         javax.swing.JButton btn_ver = new javax.swing.JButton("Ver O.P.");
         btn_ver.setName("V");
         btn_ver.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn_ver.setFont(new Font("Arial", Font.BOLD, 14));
         //boton nueva O.P
         javax.swing.JButton btn_agregar = new javax.swing.JButton("Nueva O.P.");
         btn_agregar.setName("N");
         btn_agregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn_agregar.setFont(new Font("Arial", Font.BOLD, 14));
         //boton reporte
         javax.swing.JButton btn_reporte = new javax.swing.JButton("PDF");
         btn_reporte.setName("R");
         btn_reporte.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn_reporte.setFont(new Font("Arial", Font.BOLD, 14));
 
         //Modelo de la tabla
         DefaultTableModel modeloTabla = new DefaultTableModel() {
