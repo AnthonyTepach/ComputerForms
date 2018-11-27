@@ -29,7 +29,7 @@ public class V_ConsultaProyecto extends javax.swing.JInternalFrame {
     public V_ConsultaProyecto() {
         initComponents();
         cargarTabla();
-        this.setTitle("Proyectos del "+(new Date().getYear()+1900));
+        this.setTitle("Proyectos del " + (new Date().getYear() + 1900));
     }
 
     /**
@@ -75,26 +75,26 @@ public class V_ConsultaProyecto extends javax.swing.JInternalFrame {
     private void jtb_proyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_proyectosMouseClicked
         int column = jtb_proyectos.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / jtb_proyectos.getRowHeight();
-        String clave_proyecto=null;
-        String nombre_proyecto=null;
+        String clave_proyecto = null;
+        String nombre_proyecto = null;
         if (row < jtb_proyectos.getRowCount() && row >= 0 && column < jtb_proyectos.getColumnCount() && column >= 0) {
             Object value = jtb_proyectos.getValueAt(row, column);
             if (value instanceof JButton) {
                 ((JButton) value).doClick();
                 JButton bnt = (JButton) value;
                 if (bnt.getName().equals("V")) {
-                    clave_proyecto=(String) jtb_proyectos.getValueAt(row, 0);
+                    clave_proyecto = (String) jtb_proyectos.getValueAt(row, 0);
                     verOP(clave_proyecto);
-                }else if(bnt.getName().equals("N")){
-                    clave_proyecto=(String) jtb_proyectos.getValueAt(row, 0);
-                    nombre_proyecto=(String) jtb_proyectos.getValueAt(row, 1);
-                    añadirOP(clave_proyecto,nombre_proyecto);
-                }else if(bnt.getName().equals("R")){
-                   
-                    clave_proyecto=(String) jtb_proyectos.getValueAt(row, 0);
+                } else if (bnt.getName().equals("N")) {
+                    clave_proyecto = (String) jtb_proyectos.getValueAt(row, 0);
+                    nombre_proyecto = (String) jtb_proyectos.getValueAt(row, 1);
+                    añadirOP(clave_proyecto, nombre_proyecto);
+                } else if (bnt.getName().equals("R")) {
+
+                    clave_proyecto = (String) jtb_proyectos.getValueAt(row, 0);
                     verPDF(clave_proyecto);
                 }
-                
+
             }
         }
     }//GEN-LAST:event_jtb_proyectosMouseClicked
@@ -115,35 +115,27 @@ public class V_ConsultaProyecto extends javax.swing.JInternalFrame {
     }
 
     private void verOP(String clave_proyecto) {
-       V_ConsultaOP vop=new V_ConsultaOP(clave_proyecto);
+        V_ConsultaOP vop = new V_ConsultaOP(clave_proyecto);
         VMenu.jdp_principal.add(vop);
         vop.toFront();
         vop.setVisible(true);
     }
 
-    private void añadirOP(String clave_proyecto,String Nombre) {
-        RegistrarOP rop = new RegistrarOP(clave_proyecto,Nombre);
-            VMenu.jdp_principal.add(rop);
-            rop.toFront();
-            rop.setVisible(true);
+    private void añadirOP(String clave_proyecto, String Nombre) {
+        RegistrarOP rop = new RegistrarOP(clave_proyecto, Nombre);
+        VMenu.jdp_principal.add(rop);
+        rop.toFront();
+        rop.setVisible(true);
     }
 
     private void verPDF(String clave_proyecto) {
+
+        C_Reporte crp = new C_Reporte();
         try {
-            C_Reporte crp=new C_Reporte(clave_proyecto);
-            try {
-                Thread hiloReporte=new Thread (crp,"Reporte");
-                hiloReporte.start();
-                if (!hiloReporte.isAlive()) {
-                    hiloReporte.destroy();
-                }
-                
-            } catch (Exception ex) {
-                loggger.setError(ex.getMessage(), ex.fillInStackTrace());
-            }
+            crp.cargarReporte(clave_proyecto);
         } catch (Exception ex) {
-           loggger.setError(ex.getMessage(), ex.fillInStackTrace());
+            loggger.setError(ex.getMessage(), ex.fillInStackTrace());
         }
     }
-    
+
 }
