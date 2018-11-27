@@ -9,14 +9,18 @@ import com.anthonytepach.beans.Proyecto;
 import com.anthonytepach.configuracion.LoggerRegistros;
 import com.anthonytepach.configuracion.RenderTables;
 import com.anthonytepach.modelos.MProyecto;
+import calendary.Script;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.Stack;
+import javax.swing.BorderFactory;
 import javax.swing.JRootPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 
 /**
  * Letras="CG-"+type+"AA-"+String.valueOf(new
@@ -94,22 +98,30 @@ public class C_Proyecto {
         ResultSet consulta = mpro.querryInfoProject();
         //render de la tabla
         tabla.setDefaultRenderer(Object.class, new RenderTables());
-        
+        //bordes
+        Border blackline;
+        blackline = BorderFactory.createEtchedBorder();
         //boton ver O.P
         javax.swing.JButton btn_ver = new javax.swing.JButton("Ver O.P.");
         btn_ver.setName("V");
         btn_ver.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn_ver.setFont(new Font("Arial", Font.BOLD, 14));
+        btn_ver.setFont(new Font("Arial", Font.BOLD, 12));
+        btn_ver.setBorderPainted(true);
+        btn_ver.setBorder(blackline);
         //boton nueva O.P
         javax.swing.JButton btn_agregar = new javax.swing.JButton("Nueva O.P.");
         btn_agregar.setName("N");
         btn_agregar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn_agregar.setFont(new Font("Arial", Font.BOLD, 14));
+        btn_agregar.setFont(new Font("Arial", Font.BOLD, 12));
+        btn_agregar.setBorderPainted(true);
+        btn_agregar.setBorder(blackline);
         //boton reporte
         javax.swing.JButton btn_reporte = new javax.swing.JButton("PDF");
         btn_reporte.setName("R");
         btn_reporte.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn_reporte.setFont(new Font("Arial", Font.BOLD, 14));
+        btn_reporte.setFont(new Font("Arial", Font.BOLD, 12));
+        btn_reporte.setBorderPainted(true);
+        btn_reporte.setBorder(blackline);
 
         //Modelo de la tabla
         DefaultTableModel modeloTabla = new DefaultTableModel() {
@@ -119,6 +131,7 @@ public class C_Proyecto {
             }
 
         };
+               
         //Columnas
         modeloTabla.addColumn("Clave proyecto");
         modeloTabla.addColumn("Nombre");
@@ -131,21 +144,21 @@ public class C_Proyecto {
         modeloTabla.addColumn("");
 
         //Fila
+        Script s=new Script();
         while (consulta.next()) {
-            modeloTabla.addRow(new Object[]{consulta.getString(2), consulta.getString(3), consulta.getString(6), consulta.getString(1), consulta.getString(4), consulta.getString(5), btn_agregar, btn_ver, btn_reporte});
+            modeloTabla.addRow(new Object[]{consulta.getString(2), consulta.getString(3), consulta.getString(6).toUpperCase(), consulta.getString(1), s.formatoFecha(consulta.getDate(4)),s.formatoFecha(consulta.getDate(5)), btn_agregar, btn_ver, btn_reporte});
         }
 
         //Asignacion del modelo
         tabla.setModel(modeloTabla);
         tabla.setRowHeight(25);
-        
+
         //Header de la tabla;
         JTableHeader th;
         th = tabla.getTableHeader();
         Font fuente = new Font("Arial", Font.BOLD, 13);
         th.setFont(fuente);
-        
-        
+
     }
 
 }
