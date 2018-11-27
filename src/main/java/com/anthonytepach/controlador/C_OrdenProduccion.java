@@ -5,6 +5,7 @@
  */
 package com.anthonytepach.controlador;
 
+import calendary.Script;
 import com.anthonytepach.beans.OrdenProduccion;
 import com.anthonytepach.configuracion.RenderTables;
 import com.anthonytepach.modelos.MOrdenProduccion;
@@ -52,7 +53,7 @@ public class C_OrdenProduccion {
         modeloTabla.addColumn("Fecha inicio");
         modeloTabla.addColumn("Fecha fin");
         modeloTabla.addColumn("");
-
+        Script s=new Script();
         //Filas
         while (consulta.next()) {
             modeloTabla.addRow(new Object[]{
@@ -62,8 +63,8 @@ public class C_OrdenProduccion {
                 consulta.getString(4),
                 consulta.getString(5),
                 consulta.getString(6),
-                consulta.getString(7),
-                consulta.getString(8),
+                s.formatoFecha(consulta.getDate(7)),
+                s.formatoFecha(consulta.getDate(8)),
                 btn_ver
             });
         }
