@@ -11,8 +11,10 @@ import com.anthonytepach.configuracion.RenderTables;
 import com.anthonytepach.modelos.MOrdenProduccion;
 import java.awt.Font;
 import java.sql.ResultSet;
+import javax.swing.BorderFactory;
 import javax.swing.JRootPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -32,9 +34,15 @@ public class C_OrdenProduccion {
         ResultSet consulta = mop.querryInfoOP(clave);
         //render de la tabla
         tabla.setDefaultRenderer(Object.class, new RenderTables());
+        //borde
+        Border blackline;
+        blackline = BorderFactory.createEtchedBorder();
         //botones
         javax.swing.JButton btn_ver = new javax.swing.JButton("Descripcion");
         btn_ver.setName("Desc");
+         btn_ver.setFont(new Font("Arial", Font.BOLD, 12));
+        btn_ver.setBorderPainted(true);
+        btn_ver.setBorder(blackline);
 
         //Modelo de la tabla
         DefaultTableModel modeloTabla = new DefaultTableModel() {
