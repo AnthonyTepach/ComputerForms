@@ -20,7 +20,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Anthony Tepach
  */
-public class C_Reporte extends Thread {
+public class C_Reporte{
 
     public void cargarReporte(String clave_proyecto) throws Exception{
         Map<String, Object> parametros = new HashMap<>();
